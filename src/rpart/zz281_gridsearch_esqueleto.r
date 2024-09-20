@@ -17,7 +17,8 @@ PARAM$qsemillas <- 20
 
 PARAM$training_pct <- 70L  # entre  1L y 99L 
 
-PARAM$dataset_nom <- "./datasets/competencia_01_R_datatable.csv"
+PARAM$dataset_nom <- "./datasets/competencia_01_r_datatable
+.csv"
 
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
@@ -94,11 +95,7 @@ ArbolesMontecarlo <- function(semillas, param_basicos) {
                      semillas, # paso el vector de semillas
                      MoreArgs = list(PARAM$training_pct, param_basicos), # aqui paso el segundo parametro
                      SIMPLIFY = FALSE,
-<<<<<<< HEAD
-                     mc.cores = 1 # en Windows debe ser 1
-=======
                      mc.cores = detectCores() # en Windows debe ser 1
->>>>>>> 8dec8a37af3712e40ebd710dc63df98a3ffcebf9
   )
   
   return(salida)
@@ -107,11 +104,7 @@ ArbolesMontecarlo <- function(semillas, param_basicos) {
 #------------------------------------------------------------------------------
 
 # Aqui se debe poner la carpeta de la computadora local
-<<<<<<< HEAD
-setwd("C:/Users/German/Documents/MaestriaDataMining/DMEyF") # Establezco el Working Directory
-=======
 setwd("/Users/jorgefernandez/Documents/Cienciadedatos/DMenEyF") # Establezco el Working Directory
->>>>>>> 8dec8a37af3712e40ebd710dc63df98a3ffcebf9
 # cargo los datos
 
 
@@ -130,13 +123,8 @@ dataset <- dataset[foto_mes==202104]
 
 # creo la carpeta donde va el experimento
 # HT  representa  Hiperparameter Tuning
-<<<<<<< HEAD
-dir.create("C:/Users/German/Documents/MaestriaDataMining/DMEyF/exp/HT2810/", showWarnings = FALSE)
-setwd( "C:/Users/German/Documents/MaestriaDataMining/DMEyF/exp/HT2810/" )
-=======
 dir.create("/Users/jorgefernandez/Documents/Cienciadedatos/DMenEyF/exp/HT2810/", showWarnings = FALSE)
 setwd( "/Users/jorgefernandez/Documents/Cienciadedatos/DMenEyF/exp/HT2810/" )
->>>>>>> 8dec8a37af3712e40ebd710dc63df98a3ffcebf9
 
 
 # genero la data.table donde van los resultados detallados del Grid Search
@@ -155,12 +143,7 @@ tb_grid_search_detalle <- data.table(
 
 for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
   for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
-<<<<<<< HEAD
-    for (vmin_bucket in c(
-      50,100,200,300,400,500 )) {
-=======
     for (vmin_bucket in c(3,6,12,24,48)) {
->>>>>>> 8dec8a37af3712e40ebd710dc63df98a3ffcebf9
       # notar como se agrega
       
       # vminsplit  minima cantidad de registros en un nodo para hacer el split
@@ -168,7 +151,7 @@ for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
         "cp" = -0.5, # complejidad minima
         "maxdepth" = vmax_depth, # profundidad máxima del arbol
         "minsplit" = vmin_split, # tamaño minimo de nodo para hacer split
-        "minbucket" = vmin_bucket # minima cantidad de registros en una hoja
+        "minbucket" = 5 # minima cantidad de registros en una hoja
       )
       
       # Un solo llamado, con la semilla 17
