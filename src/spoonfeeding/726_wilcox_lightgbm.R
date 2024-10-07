@@ -192,9 +192,8 @@ resultados <- data.frame()
 
 
 # Iteramos sobre las semillas
+# Iteramos sobre las semillas
 for (seed in PARAM$semillas) {
-  # Aumentamos el contador de semillas
-  num_seeds <- PARAM$num_seeds + 1
   
   # Entrenamos los modelos y obtenemos las predicciones
   predicciones <- entrenar_y_predecir(seed)
@@ -202,27 +201,27 @@ for (seed in PARAM$semillas) {
   # Calculamos las ganancias para los envios
   ganancias_1 <- ordenar_y_seleccionar(predicciones$predicciones_1, 
                                        dataset1, 
-                                       envio_inicial = envios[1],
-                                       envio_max = envios[length(envios)])
+                                       envio_inicial = PARAM$envios[1],
+                                       envio_max = PARAM$envios[length(PARAM$envios)])
   ganancias_2 <- ordenar_y_seleccionar(predicciones$predicciones_2, 
                                        dataset2,
-                                       envio_inicial = envios[1],
-                                       envio_max = envios[length(envios)])
+                                       envio_inicial = PARAM$envios[1],
+                                       envio_max = PARAM$envios[length(PARAM$envios)])
   
   # Calculamos las ganancias para ambos modelos en cada tamaño
   for (envio in PARAM$envios) {
     envio_str <- as.character(envio)
     
     # Obtenemos las ganancias directamente de las listas ganancias_1 y ganancias_2
-    ganancia_modelo_1 <- ganancias_1[[envio_str]]
-    ganancia_modelo_2 <- ganancias_2[[envio_str]]
+    ganancia_modelo_1 <- ganancias_1$ganancias[ganancias_1$envios == envio_str]
+    ganancia_modelo_2 <- ganancias_2$ganancias[ganancias_2$envios == envio_str]
     
     # Guardamos las ganancias de la semilla actual
     ganancias_total[[envio_str]]$ganancias_1 <- c(ganancias_total[[envio_str]]$ganancias_1, ganancia_modelo_1)
     ganancias_total[[envio_str]]$ganancias_2 <- c(ganancias_total[[envio_str]]$ganancias_2, ganancia_modelo_2)
     
     # Aplicamos el test de Wilcoxon y guardamos el p-valor
-    if (length(ganancias_total[[envio_str]]$ganancias_1) > 0 && length(ganancias_total[envio_str]$ganancias_2) > 0) {
+    if (length(ganancias_total[[envio_str]]$ganancias_1) > 0 && length(ganancias_total[[envio_str]]$ganancias_2) > 0) {
       resultado_wilcox <- wilcox.test(ganancias_total[[envio_str]]$ganancias_1, ganancias_total[[envio_str]]$ganancias_2, paired = TRUE)
       p_valores_totales[[envio_str]] <- c(p_valores_totales[[envio_str]], resultado_wilcox$p.value)
     }
@@ -230,6 +229,7 @@ for (seed in PARAM$semillas) {
     # Escribimos los resultados en un data frame
     df_soporte <- data.frame(envio_str, ganancia_modelo_1, ganancia_modelo_2, seed, resultado_wilcox$p.value)
     resultados <- rbind(resultados, df_soporte)
+    
     
   }
 }
