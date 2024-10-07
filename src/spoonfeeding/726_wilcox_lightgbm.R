@@ -21,9 +21,9 @@ PARAM <- list()
 PARAM$experimento_data1 <- "PP7230"
 PARAM$experimento_data2 <- "PP7230"
 PARAM$experimento_bayesiana1 <- "HT7240"
-PARAM$experimento_bayesiana2 <- "HT7240"
+PARAM$experimento_bayesiana2 <- "HT7240_2024_09_30"
 
-PARAM$experimento <- "KA7260"
+PARAM$experimento <- "TW7260"
 
 #------------------------------------------------------------------------------
 # limita el uso de memoria RAM a  Total_hardware - GB_min
@@ -50,14 +50,14 @@ setwd("~/buckets/b1/exp/") # Establezco el Working Directory
 
 # cargo el resultado de la Bayesian Optimization
 #Se debe especificar bien la ruta de este archivo. Uno es mi modelo base y el otro es el nuevo
-tb_BO_log1 <- fread(paste0(PARAM$experimento_bayesiana1,"/BO_log1.txt"))
-tb_BO_log2 <- fread(paste0(PARAM$experimento_bayesiana2,"/BO_log2.txt"))
+tb_BO_log1 <- fread(paste0(PARAM$experimento_bayesiana1,"/BO_log.txt"))
+tb_BO_log2 <- fread(paste0(PARAM$experimento_bayesiana2,"/BO_log.txt"))
 
 
 # cargo el dataset donde voy a entrenar el modelo
 #Debo especificar bien los dataset si es que hice algún datadrifting o cambio de variables
-dataset1 <- fread(paste0(PARAM$experimento_data1,"/exp_PP7230_dataset.csv.gz"))
-dataset2 <- fread(paste0(PARAM$experimento_data2,"/exp_PP7230_dataset.csv.gz"))
+dataset1 <- fread(paste0(PARAM$experimento_data1,"/dataset.csv.gz"))
+dataset2 <- fread(paste0(PARAM$experimento_data2,"/dataset.csv.gz"))
 
 
 # creo la carpeta donde va el experimento
