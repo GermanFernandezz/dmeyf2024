@@ -1,27 +1,10 @@
 
-require("data.table")
+
 library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dataset <- fread("C:/Users/German/Documents/MaestriaDataMining/DMEyF/datasets/competencia_01.csv")
 
-
-dataset[
-  foto_mes %in% 202104,
-  clasesita := ifelse(clase_ternaria == "CONTINUA", 1L, 0L)
-]
-
-
-
-# Filtrar el dataset
-enero <- dataset %>% filter(foto_mes == 202101, clase_ternaria == "BAJA+2")
-febrero <- dataset %>% filter(foto_mes == 202102, clase_ternaria == "BAJA+2")
-marzo <- dataset %>% filter(foto_mes == 202103, clase_ternaria == "BAJA+2")
-abril <- dataset %>% filter(foto_mes == 202104, clase_ternaria == "BAJA+2")
-mayo <- dataset %>% filter(foto_mes == 202105, clase_ternaria == "BAJA+2")
-
-(1189+785+981+1017)/4
 
 #Generar dataset a partir de datos de subidas a kaggle
 semillas <- as.data.frame(list("semilla" <- c("s111667","s245083","s517717","s552749","s571433"),
