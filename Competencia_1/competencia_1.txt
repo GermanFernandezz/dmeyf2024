@@ -1,0 +1,11 @@
+Instrucitvo:
+Correr los scripts en el siguiente orden:
+1- 723_preprocesamiento
+2- 744_lightgbm_binaria_BO_2024_10_!2
+3- 745_lightgbm_final
+4- 2024-10-02
+
+El ultimo código es para hacer el gráfico de envios vs ganancias generadas con las semillas en 745_lightgbm_final
+En total eran 10 semillas, pero Kaggle luego de subir muchos archivos me da el error "Submit failed. Too many requests", por lo tanto tengo que esperar unos minutos para seguir subiendo.
+Terminaré de subir mañana y me quedó con los resultados de 7 semillas
+Se elige la semilla 228913 que tiene la curva mas estable y el envío 11500 donde justo se observa una valle.
