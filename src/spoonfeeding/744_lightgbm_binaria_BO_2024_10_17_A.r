@@ -40,8 +40,8 @@ options(error = function() {
 #  muy pronto esto se leera desde un archivo formato .yaml
 PARAM <- list()
 
-PARAM$experimento_data <- "PP7230_2024_10_12_C"
-PARAM$experimento <- "HT7440"
+PARAM$experimento_data <- "PP7230_2024_10_17_A"
+PARAM$experimento <- "HT7440_2024_10_17_A"
 
 PARAM$semilla_azar <- 111661 # Aqui poner su  primer  semilla
 
@@ -97,7 +97,7 @@ PARAM$bo_lgb <- makeParamSet(
 )
 
 
-PARAM$bo_iteraciones <- 100 # iteraciones de la Optimizacion Bayesiana
+PARAM$bo_iteraciones <- 150 # iteraciones de la Optimizacion Bayesiana
 
 
 #------------------------------------------------------------------------------
@@ -262,24 +262,7 @@ setwd("~/buckets/b1/exp/") # Establezco el Working Directory
 # cargo el dataset donde voy a entrenar el modelo
 dataset <- fread(paste0(PARAM$experimento_data,"/dataset.csv.gz"))
 
-# En un mundo prolijo, estas variables se eliminan
-#  durante la creacion del dataset
-# https://www.youtube.com/watch?v=eitDnP0_83k
-dataset[, cprestamos_personales := NULL ]
-dataset[, cprestamos_personales_lag1 := NULL ]
-dataset[, cprestamos_personales_delta1 := NULL ]
 
-dataset[, mprestamos_personales := NULL ]
-dataset[, mprestamos_personales_lag1 := NULL ]
-dataset[, mprestamos_personales_delta1 := NULL ]
-
-dataset[, cplazo_fijo := NULL ]
-dataset[, cplazo_fijo_lag1 := NULL ]
-dataset[, cplazo_fijo_delta1 := NULL ]
-
-dataset[, ctarjeta_debito := NULL ]
-dataset[, ctarjeta_debito_lag1 := NULL ]
-dataset[, ctarjeta_debito_delta1 := NULL ]
 
 
 # creo la carpeta donde va el experimento
