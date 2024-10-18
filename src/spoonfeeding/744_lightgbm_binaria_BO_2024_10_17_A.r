@@ -47,7 +47,7 @@ PARAM$semilla_azar <- 111661 # Aqui poner su  primer  semilla
 
 # por ahora 1 para que no me llueva una catarata de preguntas de alumnos
 #  justo antes del cierre de la primera competencia
-PARAM$semillas_cantidad <- 1
+PARAM$semillas_cantidad <- 5
 
 PARAM$hyperparametertuning$POS_ganancia <- 273000
 PARAM$hyperparametertuning$NEG_ganancia <- -7000
