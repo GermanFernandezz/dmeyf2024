@@ -27,7 +27,7 @@ PARAM <- list()
 
 PARAM$experimento <- "PP7230_2024_10_17_A"
 
-PARAM$input$dataset <- "./datasets/competencia_02.csv"
+PARAM$input$dataset <- "./datasets/competencia_02.csv.gz"
 
 PARAM$semilla_azar <- 111667 # Aqui poner su  primer  semilla
 
