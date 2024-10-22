@@ -81,18 +81,23 @@ cols_lagueables <- copy(
 # ordeno el dataset, FUNDAMENTAL
 setorder(dataset, numero_de_cliente, foto_mes)
 
-# creo los lags de orden 1
-dataset[, paste0(cols_lagueables, "_lag1") := shift(.SD, 1, NA, "lag"),
-  by = numero_de_cliente,
-  .SDcols = cols_lagueables
-]
 
-# agrego los delta lags de orden 1
-for (vcol in cols_lagueables)
-{
-  dataset[, paste0(vcol, "_delta1") := get(vcol) - get(paste0(vcol, "_lag1"))]
+# Definir el número de lags a generar
+max_lag <- 3
+
+# Generar lags y delta lags en un bucle
+for (i in 1:max_lag) {
+  
+  # Crear los lags de orden i
+  dataset[, paste0(cols_lagueables, "_lag", i) := shift(.SD, i, NA, "lag"),
+          by = numero_de_cliente,
+          .SDcols = cols_lagueables]
+  
+  # Agregar los delta lags de orden i
+  for (vcol in cols_lagueables) {
+    dataset[, paste0(vcol, "_delta", i) := get(vcol) - get(paste0(vcol, "_lag", i))]
+  }
 }
-
 
 # Training Strategy  ----------------------------------------------
 
