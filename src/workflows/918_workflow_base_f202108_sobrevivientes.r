@@ -457,5 +457,5 @@ wf_agosto_gf_sobrevivientes <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_agosto_gf_AAAA_MM_DD()
+wf_agosto_gf_sobrevivientes()
 
