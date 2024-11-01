@@ -16,7 +16,7 @@ impo_1 <- fread("impo_1.txt")
 
 variables_importantes <- impo_1[1:20, Feature] #Selecciono las 20 variables mas importantes
 
-
+#Cambiar de acuerdo a medida que vamos avanzando con la nueva generación de variables
 k=1
 #AQUI COMIENZO A CREAR NUEVAS VARIABLES-----------------------------------------
 
