@@ -16,6 +16,8 @@ envg$EXPENV$exp_dir <- "~/buckets/b1/expw/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$repo_dir <- "~/dmeyf2024/"
 envg$EXPENV$datasets_dir <- "~/buckets/b1/datasets/"
+
+
 envg$EXPENV$messenger <- "~/install/zulip_enviar.sh"
 
 envg$EXPENV$semilla_primigenia <- 111667
@@ -455,6 +457,7 @@ wf_agosto_gf_sobrevivientes <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
+  #Reemplazar por el archivo de la iteración de asesinato que correponda
   DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
 
   # Etapas preprocesamiento
