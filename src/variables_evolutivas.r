@@ -1,17 +1,23 @@
 require( "data.table" )
 
+#Especificar carpeta donde guarda el dataset los canarios asesinos.
+#Si va a ser la primer iteracion, especificar carpeta del dataset original
 setwd("~/buckets/b1/datasets") # Establezco el Working Directory
 
+#Nombre del dataset
 dataset <- fread("competencia_02.csv.gz")
 
-setwd("~/buckets/b1/expw/CN-0001")
+#Nombre de la carpeta donde se guardan la importancia de las variables. suele ser la del ultimo canario asesino
+#Si es primer iteración, correr un canario asesino que da el archivo con la importancia
+setwd("~/buckets/b1/expw/CN-0005")
 
+#Nombre del archivo con las variables ordendas por importancia.
 impo_1 <- fread("impo_1.txt")
 
-variables_importantes <- impo_1[1:20, "Feature	Gain"] #Selecciono las 20 variables mas importantes
+variables_importantes <- impo_1[1:20, Feature] #Selecciono las 20 variables mas importantes
 
-#ACA HAY QUE EMPEZAR UN MEGA BUCLE
-for (k in 1:20) {
+
+k=1
 #AQUI COMIENZO A CREAR NUEVAS VARIABLES-----------------------------------------
 
 # Inicializa nuevas_variables como un data.table vacío
@@ -103,8 +109,13 @@ nombre_archivo <- paste0("nuevas_variables_iter_", k, ".csv")
 fwrite(nuevas_variables, file = nombre_archivo, logical01 = TRUE, sep = ",")
 cat( "Finalizado grabado de nuevas variables\n" )
 
+# grabo el dataset
+cat( "escritura del dataset nuevo\n")
+cat( "Iniciando grabado del dataset nuevo\n" )
+nombre_dataset <- paste0("dataset_iter_", k, ".csv.gz")
+
+# Guarda el archivo
+fwrite(dataset, file = nombre_dataset, logical01 = TRUE, sep = ",")
+cat( "Finalizado grabado del dataset nuevo\n" )
 
 
-
-
-}
