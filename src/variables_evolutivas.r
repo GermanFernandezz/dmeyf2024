@@ -2,10 +2,10 @@ require( "data.table" )
 
 #Especificar carpeta donde guarda el dataset los canarios asesinos.
 #Si va a ser la primer iteracion, especificar carpeta del dataset original
-setwd("~/buckets/b1/datasets") # Establezco el Working Directory
+setwd("~/buckets/b1/expw/CN-0007")  # Establezco el Working Directory
 
 #Nombre del dataset
-dataset <- fread("dataset_iter_1.csv.gz")
+dataset <- fread("dataset.csv.gz")
 
 #Nombre de la carpeta donde se guardan la importancia de las variables. suele ser la del ultimo canario asesino
 #Si es primer iteración, correr un canario asesino que da el archivo con la importancia
