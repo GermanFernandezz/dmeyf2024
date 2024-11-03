@@ -42,7 +42,7 @@ AgregarVariables_IntraMes <- function(dataset) {
   # INICIO de la seccion donde se deben hacer cambios con variables nuevas
 
   nuevas_variables <- data.table()
-
+k=5
 # Bucle para crear nuevas variables y agregar al dataset
 l=1
 for (i in 1:length(variables_importantes)) {
@@ -178,6 +178,10 @@ cat( "Iniciando lectura del dataset\n" )
 dataset <- fread(envg$PARAM$dataset)
 cat( "Finalizada lectura del dataset\n" )
 
+cat( "lectura de las variables importantes\n")
+cat( "Iniciando lectura de las variables importanes\n" )
+impo_1 <- fread(envg$PARAM$impo_1)
+cat( "Finalizada lectura de las variables importantes\n" )
 
 GrabarOutput()
 
