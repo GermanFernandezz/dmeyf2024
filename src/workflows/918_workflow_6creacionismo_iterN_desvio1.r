@@ -227,6 +227,27 @@ FErf_attributes_base <- function( pinputexps,
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
+# Experimento Colaborativo Creacionismo
+
+FE_creacionismo_base <- function( pinputexps, k, cn)
+{
+  if( -1 == (param_local <- exp_init())$resultado ) return( 0 )# linea fija
+
+  
+  # Agrega k y cn al parámetro param_local
+  param_local$Creacionismo$k <- k
+  param_local$Creacionismo$cn <- cn
+
+
+  param_local$meta$script <- "/src/wf-etapas/1351_FE_variables_evolutivas_v2.r"
+
+  return( exp_correr_script( param_local ) ) # linea fija
+
+}
+
+
+
+#------------------------------------------------------------------------------
 # Canaritos Asesinos   Baseline
 #  azaroso, utiliza semilla
 
@@ -420,35 +441,61 @@ KA_evaluate_kaggle <- function( pinputexps )
 # Este es el  Workflow Baseline
 # Que predice 202108 donde NO conozco la clase
 
-wf_agosto_base_iteracion_3 <- function( pnombrewf )
+wf_agosto_creacionismo_itern_desvio0 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
-  # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/b1/datasets/dataset_iter_3bis.csv.gz")
 
-  # Etapas preprocesamiento
-#  CA_catastrophe_base( metodo="MachineLearning")
-#  FEintra_manual_base()
-#  DR_drifting_base(metodo="deflacion")
-#  FEhist_base()
+  # Definimos un k ykmax
+  k <- 2
+  maxk <- 4
+  cn <- 3 
+  intervalo_bo <- 2
 
-#  FErf_attributes_base( arbolitos= 20,
-#    hojas_por_arbol= 16,
-#    datos_por_hoja= 1000,
-#    mtry_ratio= 0.2
-#  )
 
-   CN_canaritos_asesinos_base(ratio=0.2, desvio=3.0)
+  if (k == 0) {  
+    # Etapa especificacion dataset de la Segunda Competencia Kaggle
+    DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
 
-  # Etapas modelado
-  ts8 <- TS_strategy_base8()
-  ht <- HT_tuning_base( bo_iteraciones = 40 )  # iteraciones inteligentes
+    # Etapas preprocesamiento
+    CA_catastrophe_base( metodo="MachineLearning")
+    #FEintra_manual_base()
+    DR_drifting_base(metodo="deflacion")
+    FEhist_base()
 
-  # Etapas finales
-  fm <- FM_final_models_lightgbm( c(ht, ts8), ranks=c(1), qsemillas=5 )
-  SC_scoring( c(fm, ts8) )
-  KA_evaluate_kaggle()  # genera archivos para Kaggle
+    FErf_attributes_base( arbolitos= 20,
+      hojas_por_arbol= 16,
+      datos_por_hoja= 1000,
+      mtry_ratio= 0.2
+    )
+
+  }
+  # Bucle for que va desde k hasta maxk
+  for (k in k:maxk) {
+    if (k != 0) {  
+      FE_creacionismo_base(k=k, cn=sprintf("%04d", cn))
+      # Crear el nombre del archivo dinámicamente usando k
+      archivo <- paste0("~/buckets/b1/datasets/dataset_iter_", k, ".csv.gz")
+      DT_incorporar_dataset(archivo)
+    }
+
+    CN_canaritos_asesinos_base(ratio=0.2, desvio=1.0)
+    cn <- cn + 1
+
+    # Verificar si k es un número par
+    if (k %% intervalo_bo == 0 || k == 0 || k == kmax) {
+      # Etapas modelado
+      ts8 <- TS_strategy_base8()
+      ht <- HT_tuning_base( bo_iteraciones = 40 )  # iteraciones inteligentes
+
+      # Etapas finales
+      fm <- FM_final_models_lightgbm( c(ht, ts8), ranks=c(1), qsemillas=5 )
+      SC_scoring( c(fm, ts8) )
+      KA_evaluate_kaggle()  # genera archivos para Kaggle
+    }
+
+    k <- k + 1
+  }
 
   return( exp_wf_end() ) # linea workflow final fija
 }
@@ -457,4 +504,4 @@ wf_agosto_base_iteracion_3 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_agosto_base_iteracion_3()
+wf_agosto_creacionismo_itern_desvio0()
