@@ -438,7 +438,7 @@ wf_variables_evolutivas_iter_1rep <- function( pnombrewf )
 #    mtry_ratio= 0.2
 #  )
 
-   CN_canaritos_asesinos_base(ratio=0.2, desvio=0.0)
+   CN_canaritos_asesinos_base(ratio=0.2, desvio=1.0)
    FEhist_base()
    CN_canaritos_asesinos_base(ratio=0.2, desvio=-2.0)
 
