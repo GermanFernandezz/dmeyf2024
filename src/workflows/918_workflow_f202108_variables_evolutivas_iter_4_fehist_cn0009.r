@@ -425,7 +425,7 @@ wf_variables_evolutivas_iter_4_FEhist_cn0009 <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/expw/CN-0009/dataset.csv.gz")
+  DT_incorporar_dataset( "~/buckets/b1/expw/CN-0009/dataset_cn0009.csv.gz")
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
