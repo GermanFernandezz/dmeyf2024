@@ -435,7 +435,7 @@ wf_junio_variables_evolutivas_super_random_feintra <- function( pnombrewf )
   CA_catastrophe_base( metodo="MachineLearning")
 #  FEintra_manual_base()
 #  DR_drifting_base(metodo="deflacion")
-  FEhist_base()
+#  FEhist_base()
 
 #  FErf_attributes_base( arbolitos= 20,
 #    hojas_por_arbol= 16,
