@@ -42,7 +42,6 @@ AgregarVariables_IntraMes <- function(dataset) {
   # INICIO de la seccion donde se deben hacer cambios con variables nuevas
 
   # Aqui debe usted agregar sus propias nuevas variables
-  # Crear la variable mpasivos_margen_lag1 como un lag de orden 1 de mpasivos_margen
   
   dataset[, iter_7_var_73 := (minversion2 + cplazo_fijo) + ((cplazo_fijo) + (Visa_msaldopesos * ccomisiones_otras))]
 
