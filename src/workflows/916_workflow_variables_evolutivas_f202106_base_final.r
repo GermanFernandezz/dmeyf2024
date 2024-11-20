@@ -443,7 +443,7 @@ wf_junio_variables_evolutivas_prep_iter_1 <- function( pnombrewf )
     mtry_ratio= 0.2
   )
 
-  CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
+  CN_canaritos_asesinos_base(ratio=0.2, desvio=2.0)
 
   # Etapas modelado
   ts6 <- TS_strategy_base6()
