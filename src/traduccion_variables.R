@@ -6,7 +6,7 @@
 #archivo1 <- "datasets_nuevas_variables_iter_2.txt"
 data_final <- read.csv("variables_traducidas.txt")
 
-
+# Bucle para traducir y guardar en un solo archivo todas las variables generadas. El k debe corresponder con los archivos donde se fueron guardando las nuevas variables sin traducir.
 for (k in 2:20) {
 archivo <- paste0("nuevas_variables_iter_", k, ".txt")
 
