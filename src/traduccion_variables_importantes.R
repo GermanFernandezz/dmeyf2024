@@ -4,7 +4,7 @@
 data_final <- read.csv("variables_traducidas.txt")
 
 
-
+# Bucle para guardar la traducción de las variables ordenadas por importancia. La k deben corresponder con los experimentos que se quieren traducir.
 for (k in 17:20) {
 # Es el archivo de las variables ordenadas por importancia que sale de canaritos
 
