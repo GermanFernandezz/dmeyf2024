@@ -116,7 +116,7 @@ FEintra_manual_propio <- function( pinputexps )
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/src/wf-etapas/1301_FE_intrames_manual_variables_evolutivas_progresivas2.r"
+  param_local$meta$script <- "/src/wf-etapas/1301_FE_intrames_manual_variables_evolutivas_progresivas_competencia2.r"
 
   param_local$semilla <- NULL  # no usa semilla, es deterministico
 
