@@ -19,7 +19,7 @@ envg$EXPENV$repo_dir <- "~/dmeyf2024/"
 envg$EXPENV$datasets_dir <- "~/buckets/b1/datasets/"
 envg$EXPENV$messenger <- "~/install/zulip_enviar.sh"
 
-envg$EXPENV$semilla_primigenia <- 102191
+envg$EXPENV$semilla_primigenia <- 111667
 
 # leo el unico parametro del script
 args <- commandArgs(trailingOnly=TRUE)
@@ -108,6 +108,36 @@ FEintra_manual_base <- function( pinputexps )
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
+# Feature Engineering Intra Mes   Baseline
+# deterministico, SIN random
+
+FEintra_manual_propio <- function( pinputexps )
+{
+  if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
+
+
+  param_local$meta$script <- "/src/wf-etapas/1301_FE_intrames_manual_variables_evolutivas_progresivas2.r"
+
+  param_local$semilla <- NULL  # no usa semilla, es deterministico
+
+  return( exp_correr_script( param_local ) ) # linea fija
+}
+#------------------------------------------------------------------------------
+# Feature Engineering Intra Mes   Baseline
+# deterministico, SIN random
+
+FEintra_manual_estacionalidad <- function( pinputexps )
+{
+  if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
+
+
+  param_local$meta$script <- "/src/wf-etapas/1301_FE_intrames_manual_estacionalidad.r"
+
+  param_local$semilla <- NULL  # no usa semilla, es deterministico
+
+  return( exp_correr_script( param_local ) ) # linea fija
+}
+#------------------------------------------------------------------------------
 # Data Drifting Baseline
 # deterministico, SIN random
 
@@ -183,7 +213,7 @@ FErf_attributes_base <- function( pinputexps, ratio, desvio)
   # parametros para que LightGBM se comporte como Random Forest
   param_local$lgb_param <- list(
     # parametros que se pueden cambiar
-    num_iterations = 20,
+    num_iterations = 25,
     num_leaves  = 16,
     min_data_in_leaf = 1000,
     feature_fraction_bynode  = 0.2,
@@ -303,8 +333,8 @@ TS_strategy_base8 <- function( pinputexps )
     202106, 202105, 202104, 202103, 202102, 202101, 
     202012, 202011, 202010, 202009, 202008, 202007, 
     # 202006  Excluyo por variables rotas
-    202005, 202004, 202003, 202002, 202001,
-    201912, 201911,
+    # 202003 y 202004 Exluyo por recomendacion de experimentos colaborativos
+    202005, 202002, 202001, 201912, 201911,
     # 201910 Excluyo por variables rotas
     201909, 201908, 201907, 201906,
     # 201905  Excluyo por variables rotas
@@ -319,8 +349,8 @@ TS_strategy_base8 <- function( pinputexps )
     202104, 202103, 202102, 202101, 
     202012, 202011, 202010, 202009, 202008, 202007, 
     # 202006  Excluyo por variables rotas
-    202005, 202004, 202003, 202002, 202001,
-    201912, 201911,
+    # 202003 y 202004 Exluyo por recomendacion de experimentos colaborativos
+    202005, 202002, 202001, 201912, 201911,
     # 201910 Excluyo por variables rotas
     201909, 201908, 201907, 201906,
     # 201905  Excluyo por variables rotas
@@ -487,9 +517,11 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_manual_base()
   DR_drifting_base(metodo="rank_cero_fijo")
+  FEintra_manual_propio()
   FEhist_base()
   ultimo <- FErf_attributes_base()
-  #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
+  CN_canaritos_asesinos_base(ratio=1.0, desvio=0.0)
+  FEintra_manual_estacionalidad()
 
   ts8 <- TS_strategy_base8()
 
