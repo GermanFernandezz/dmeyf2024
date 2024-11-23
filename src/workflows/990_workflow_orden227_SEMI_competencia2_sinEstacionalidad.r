@@ -521,14 +521,14 @@ wf_SEMI_ago_orden227_competencia2 <- function( pnombrewf )
   FEhist_base()
   ultimo <- FErf_attributes_base()
   CN_canaritos_asesinos_base(ratio=1.0, desvio=0.0)
-  FEintra_manual_estacionalidad()
+#  FEintra_manual_estacionalidad()
 
   ts8 <- TS_strategy_base8()
 
   # la Bayesian Optimization con el semillerio dentro
   ht <- HT_tuning_semillerio(
     semillerio = 50, # semillerio dentro de la Bayesian Optim
-    bo_iteraciones = 10  # iteraciones inteligentes, apenas 10
+    bo_iteraciones = 20  # iteraciones inteligentes, apenas 10
   )
 
 
