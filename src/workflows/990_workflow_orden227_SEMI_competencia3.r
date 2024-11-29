@@ -516,5 +516,5 @@ wf_sep_competencia_3 <- function( pnombrewf )
 #------------------------------------------------------------------------------
 # Aqui comienza el programa
 
-# llamo al workflow con future = 202108
+# llamo al workflow con future = 202109
 wf_sep_competencia_3()
